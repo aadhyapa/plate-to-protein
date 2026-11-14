@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+*.local
+.netlify
+# Raw USDA downloads are never committed (see SPEC.md section 5)
+data/raw
