@@ -1,0 +1,490 @@
+/* Styles for the Cell stage. */
+
+.cell {
+  display: grid;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.cell a:not(.button) {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.cell__section {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.cell__section .section-title {
+  margin-bottom: 0;
+}
+
+/* ---------- Sequence input ---------- */
+
+.sequence {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+}
+
+.sequence .section-title {
+  margin-bottom: 0;
+}
+
+.sequence__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sequence__input {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  resize: vertical;
+  overflow-wrap: anywhere;
+}
+
+.sequence__messages:empty {
+  display: none;
+}
+
+.sequence__messages {
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-sunk);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+
+.sequence__reading {
+  max-width: 22rem;
+}
+
+/* ---------- Simulator ---------- */
+
+.sim {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.sim__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.sim__status {
+  min-height: 3.2em;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  font-size: 1.05rem;
+}
+
+.strand-key {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.1rem;
+  color: var(--text-muted);
+}
+
+.strand-key li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.strand-key__swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+  border: 1.5px solid var(--border);
+}
+
+.strand-key__swatch--coding { background: var(--surface); }
+.strand-key__swatch--template { background: var(--surface-sunk); }
+.strand-key__swatch--mrna { background: var(--mrna-bg); border-color: var(--structure); }
+.strand-key__swatch--amino { background: var(--accent); border-color: var(--accent); }
+
+:root {
+  --mrna-bg: #e8e9fb;
+}
+
+:root[data-theme='dark'] {
+  --mrna-bg: #2a2c52;
+}
+
+/* Columns of three bases, wrapping like text. */
+.columns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 0.35rem;
+}
+
+.column {
+  display: grid;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  text-align: center;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.column--untranslated {
+  opacity: 0.55;
+}
+
+.column.is-current {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.column__row {
+  display: block;
+  min-width: 3.1rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 5px;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.column__row--coding {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-weight: 700;
+}
+
+.column__row--template {
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.column__row--mrna {
+  background: var(--mrna-bg);
+  border: 1px solid var(--structure);
+  font-weight: 700;
+}
+
+.column__row--amino {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+
+.column--untranslated .column__row--amino {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.column__row.is-hidden {
+  opacity: 0;
+  transform: translateY(-0.4rem);
+}
+
+/* ---------- Protein chain ---------- */
+
+.chain-out {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chain-out__title {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.residues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0;
+}
+
+.residue {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* The bond to the next amino acid. */
+.residues .residue:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 0.5rem;
+  height: 3px;
+  margin-top: -1.5px;
+  background: var(--accent);
+}
+
+.residue--essential {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4.5px var(--plate);
+}
+
+.residue__number {
+  position: absolute;
+  bottom: -0.15rem;
+  right: -0.1rem;
+  min-width: 1.1rem;
+  padding: 0 0.2rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
+
+.residue--key {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin: 0 0.5rem 0 0.3rem;
+  vertical-align: middle;
+}
+
+.residues--compact .residue {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.72rem;
+}
+
+.residue--changed {
+  background: var(--gut);
+  outline: 3px dashed var(--text);
+  outline-offset: 2px;
+}
+
+/* ---------- Codon wheel ---------- */
+
+.wheel-layout {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .wheel-layout {
+    grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+  }
+}
+
+.wheel {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0 auto;
+  display: block;
+}
+
+.wheel__cell path {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 0.75;
+  transition: fill 0.2s ease;
+}
+
+.wheel__cell--codon,
+.wheel__cell--amino {
+  cursor: pointer;
+}
+
+.wheel__cell--codon:hover path,
+.wheel__cell--amino:hover path {
+  fill: var(--surface-sunk);
+}
+
+.wheel__cell--amino path {
+  fill: var(--surface-sunk);
+}
+
+.wheel__cell--amino.is-stop path {
+  fill: var(--text-muted);
+}
+
+.wheel__cell--amino.is-stop text {
+  fill: var(--bg);
+}
+
+.wheel__cell.is-active path {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.wheel text {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: var(--font-body);
+  font-weight: 700;
+  fill: var(--text);
+  pointer-events: none;
+}
+
+.wheel__cell.is-active text {
+  fill: var(--on-accent);
+}
+
+.wheel__base--1 { font-size: 15px; }
+.wheel__base--2 { font-size: 10px; }
+.wheel__base--3 { font-size: 6.5px; }
+.wheel__amino { font-size: 8.5px; }
+
+.wheel-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.wheel-lookup {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 7rem));
+  gap: 0.6rem;
+}
+
+.wheel-readout {
+  min-height: 4.5em;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  font-size: 1.05rem;
+}
+
+/* ---------- Mutation lab ---------- */
+
+.lab {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.lab__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.columns--lab {
+  gap: 0.9rem 0.5rem;
+}
+
+.column__row--buttons {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: transparent;
+  border: none;
+}
+
+.base {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.base:hover {
+  border-color: var(--accent);
+}
+
+.base.is-selected {
+  border-color: var(--accent);
+  border-width: 3px;
+}
+
+.base.is-changed {
+  background: var(--gut);
+  border-color: var(--gut);
+  color: var(--on-accent);
+}
+
+.base--choice {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.lab__picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--surface-sunk);
+}
+
+.lab__result {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+}
+
+.lab__kind {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.lab__kind[data-kind='missense'],
+.lab__kind[data-kind='nonsense'],
+.lab__kind[data-kind='start-lost'],
+.lab__kind[data-kind='stop-lost'] {
+  color: var(--gut);
+}
+
+.lab__compare {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lab__compare > div {
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Lab columns have big tap targets; let them scroll sideways on small screens rather than shrink. */
+@media (max-width: 30rem) {
+  .base {
+    width: 2.4rem;
+  }
+}

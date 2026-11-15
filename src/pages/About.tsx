@@ -48,6 +48,10 @@ export default function About() {
           of Nutrition and Dietetics: Vegetarian Diets</cite>, J Acad Nutr Diet 116(12), 2016.
         </li>
         <li>
+          <strong>Gene sequence:</strong> the beta-globin example is the start of the coding sequence of the
+          human HBB gene, NCBI reference sequence NM_000518.
+        </li>
+        <li>
           <strong>3D structures:</strong>{' '}
           <a href="https://www.rcsb.org/" target="_blank" rel="noreferrer">
             RCSB Protein Data Bank

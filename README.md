@@ -6,7 +6,7 @@ The full build spec is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Milestone 4 of 8 (Gut stage): the Plate stage (food search, meal builder, protein goal, compare, presets) and the Gut stage (scroll-through digestion, the meal's amino acid profile, fix-it suggestions, a complementary protein lesson and a quiz) are built. Cell, Structure and Wrap-up are still placeholders.
+Milestone 5 of 8 (Cell stage): Plate (food search, meal builder, protein goal, compare, presets), Gut (digestion walkthrough, amino acid profile, fix-it suggestions, lesson, quiz) and Cell (DNA to mRNA to protein simulator, codon wheel, mutation lab with the sickle cell change) are built. Structure and Wrap-up are still placeholders.
 
 ## Tech stack
 
