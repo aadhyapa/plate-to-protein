@@ -6,13 +6,14 @@ The full build spec is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Milestone 2 of 8 (data): the project scaffold, routing, stage tracker, theme and layout are in place, and the food data is built. The stages themselves are still placeholders.
+Milestone 3 of 8 (Plate stage): you can search about 1,200 foods, filter them, build a meal, set a daily protein goal, compare foods and start from preset meals. Gut, Cell, Structure and Wrap-up are still placeholders.
 
 ## Tech stack
 
 - Vite + React + TypeScript
 - React Router (one route per stage)
 - React context persisted to `localStorage` (wrapped so the site works without storage)
+- Hand-written fuzzy search and SVG/CSS charts, so there are no search or chart dependencies
 - Vitest for logic tests
 - Hosted on Netlify (`netlify.toml` holds the build settings and the single-page-app redirect)
 

@@ -4,6 +4,7 @@ import { STAGES } from './lib/stages';
 import About from './pages/About';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
+import Plate from './pages/Plate';
 import StagePage from './pages/StagePage';
 
 export default function App() {
@@ -13,7 +14,11 @@ export default function App() {
         <Route index element={<Landing />} />
         {/* One route per stage. Each placeholder is replaced as its milestone lands. */}
         {STAGES.map((stage) => (
-          <Route key={stage.id} path={stage.path} element={<StagePage stage={stage} />} />
+          <Route
+            key={stage.id}
+            path={stage.path}
+            element={stage.id === 'plate' ? <Plate /> : <StagePage stage={stage} />}
+          />
         ))}
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { stageForPath } from '../lib/stages';
 import Footer from './Footer';
+import MealDrawer from './MealDrawer';
 import MealPill from './MealPill';
 import StageTracker from './StageTracker';
 import ThemeToggle from './ThemeToggle';
@@ -40,6 +41,7 @@ export default function Layout() {
         <Outlet />
       </main>
       {stage && <MealPill />}
+      <MealDrawer />
       <Footer />
     </div>
   );

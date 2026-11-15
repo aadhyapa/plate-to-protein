@@ -1,0 +1,697 @@
+/* Styles for the Plate stage, the meal panel and shared form controls. */
+
+/* ---------- Small shared pieces ---------- */
+
+.muted {
+  color: var(--text-muted);
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.input:hover {
+  border-color: var(--text-muted);
+}
+
+.input--unit {
+  width: 5rem;
+  flex: none;
+}
+
+.input--small {
+  min-height: 2.5rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.95rem;
+}
+
+.button--small {
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.button--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.button--ghost[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-sunk);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.25rem;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-sunk);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge--complete {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stepper__button,
+.stepper__remove {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stepper__button:hover:not(:disabled),
+.stepper__remove:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.stepper__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepper__remove {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.stepper__value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Page layout ---------- */
+
+.plate {
+  display: grid;
+  gap: 2rem;
+}
+
+.plate__main {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.plate__side {
+  display: none;
+}
+
+@media (min-width: 60rem) {
+  .plate {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    align-items: start;
+  }
+
+  .plate__side {
+    display: block;
+    position: sticky;
+    top: 7.5rem;
+    max-height: calc(100vh - 8.5rem);
+    overflow-y: auto;
+  }
+
+  /* The sidebar already shows the meal, so the floating pill is redundant here. */
+  [data-stage='plate'] .meal-pill {
+    display: none;
+  }
+}
+
+.plate__sources {
+  margin-top: 1rem;
+}
+
+/* ---------- Presets ---------- */
+
+.presets__list {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+
+.preset {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.preset:hover {
+  border-color: var(--accent);
+}
+
+.preset__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.preset__description {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Goal calculator ---------- */
+
+.goal {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.goal .card__title {
+  margin-bottom: 0;
+}
+
+.goal__fields {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.goal__result {
+  font-size: 1.15rem;
+}
+
+.goal__disclaimer {
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-sunk);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ---------- Search and filters ---------- */
+
+.search {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.search .section-title {
+  margin-bottom: 0;
+}
+
+.search__input {
+  min-height: 3.25rem;
+  font-size: 1.05rem;
+  border-width: 2px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.chip input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.chip input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.chip input:checked + span::before {
+  content: '✓';
+  margin-right: 0.35rem;
+}
+
+.chip input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.filters__category {
+  width: auto;
+  max-width: 100%;
+}
+
+/* ---------- Food cards ---------- */
+
+.foods {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+}
+
+.food {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+
+.food__name {
+  font-size: 1.2rem;
+  overflow-wrap: anywhere;
+}
+
+.food__detail {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.food__facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 0.75rem 1.25rem;
+}
+
+.food__facts dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.food__facts dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.food__facts div:last-child dd {
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.food__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.food__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.food__in-meal {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- Compare ---------- */
+
+.compare {
+  display: grid;
+  gap: 1rem;
+}
+
+.compare .card__title {
+  margin-bottom: 0;
+}
+
+/* One color per compared food, always paired with its name. */
+[data-series='0'] { --series: var(--plate); }
+[data-series='1'] { --series: var(--cell); }
+[data-series='2'] { --series: var(--structure); }
+
+.compare__foods {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.compare__food {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+}
+
+.compare__swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+  background: var(--series);
+}
+
+.compare__price {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.compare__price .input {
+  width: 7.5rem;
+}
+
+.compare__charts {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.chart__title {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.chart__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.chart__row {
+  display: grid;
+  grid-template-columns: minmax(5rem, 8rem) minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.chart__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart__track {
+  height: 1.1rem;
+  border-radius: 4px;
+  background: var(--surface-sunk);
+  overflow: hidden;
+}
+
+.chart__bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  border-radius: 4px;
+  background: var(--series);
+  transition: width 0.3s ease;
+}
+
+.chart__value {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Meal panel ---------- */
+
+.meal {
+  display: grid;
+  gap: 1rem;
+}
+
+.meal__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.meal__heading {
+  font-size: 1.4rem;
+}
+
+.meal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.meal__item {
+  display: grid;
+  gap: 0.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.meal__item-text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.meal__item-name {
+  font-weight: 700;
+}
+
+.meal__item-detail,
+.meal__item-amount {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.meal__totals {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.meal__total {
+  font-size: 1.15rem;
+}
+
+.meal__total strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+
+.progress {
+  height: 0.8rem;
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--plate);
+  transition: width 0.3s ease;
+}
+
+.meal__cta {
+  background: var(--plate);
+  text-align: center;
+}
+
+.plate__meal {
+  border-top-color: var(--plate);
+}
+
+/* The pill is now a button. */
+button.meal-pill {
+  font: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ---------- Meal drawer (native <dialog>) ---------- */
+
+.drawer {
+  /* Bottom sheet on phones. */
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  max-width: none;
+  max-height: 85vh;
+  max-height: 85dvh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 20px 20px 0 0;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 -8px 40px rgb(0 0 0 / 0.25);
+  overflow-y: auto;
+}
+
+.drawer::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.drawer[open] {
+  animation: sheet-up 0.25s ease;
+}
+
+.drawer__body {
+  position: relative;
+  padding: 1.5rem 1.25rem 2rem;
+}
+
+.drawer__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.drawer .meal__top {
+  padding-right: 3.5rem;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (min-width: 40rem) {
+  /* Side panel on wider screens. */
+  .drawer {
+    inset: 0 0 0 auto;
+    width: 24rem;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: -8px 0 40px rgb(0 0 0 / 0.25);
+  }
+
+  .drawer[open] {
+    animation: panel-in 0.25s ease;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    transform: translateX(100%);
+  }
+}
