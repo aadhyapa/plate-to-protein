@@ -18,7 +18,9 @@ export default function About() {
           <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noreferrer">
             USDA FoodData Central
           </a>{' '}
-          (public domain).
+          , SR Legacy release (April 2018), from the U.S. Department of Agriculture, Agricultural
+          Research Service. Public domain. Vegetarian and vegan labels are estimated from food names and
+          categories, not ingredient lists.
         </li>
         <li>
           <strong>Amino acid reference pattern and protein requirement:</strong> WHO/FAO/UNU,{' '}

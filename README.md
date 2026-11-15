@@ -6,7 +6,7 @@ The full build spec is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Milestone 1 of 8 (setup): project scaffold, routing, stage tracker, light/dark theme, layout and footer. The stages themselves are placeholders for now.
+Milestone 2 of 8 (data): the project scaffold, routing, stage tracker, theme and layout are in place, and the food data is built. The stages themselves are still placeholders.
 
 ## Tech stack
 
@@ -26,9 +26,21 @@ npm run typecheck  # check types
 npm run build      # production build into dist/
 ```
 
+## Food data
+
+`public/data/foods.json` holds about 1,200 everyday foods with calories, protein and amino acids per serving. It is generated from the USDA FoodData Central **SR Legacy** download by `scripts/build-foods.mjs`, which keeps only foods with full amino acid data, merges near-duplicates (one raw and one prepared version of each food) and tags vegetarian and vegan foods by name and category.
+
+To rebuild it, download the SR Legacy CSV zip from [FoodData Central](https://fdc.nal.usda.gov/download-datasets), unzip it, and run:
+
+```bash
+npm run data -- path/to/FoodData_Central_sr_legacy_food_csv_2018-04
+```
+
+The raw USDA files are not committed.
+
 ## Data sources
 
-- Foods and amino acids: USDA FoodData Central (public domain)
+- Foods and amino acids: U.S. Department of Agriculture, Agricultural Research Service. FoodData Central: SR Legacy, April 2018. fdc.nal.usda.gov (public domain, CC0 1.0)
 - Amino acid reference pattern: WHO/FAO/UNU (2007), WHO Technical Report Series 935
 - 3D structures: RCSB Protein Data Bank and AlphaFold Protein Structure Database
 
