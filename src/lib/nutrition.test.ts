@@ -14,6 +14,7 @@ import {
 } from './nutrition';
 import { PRESET_MEALS } from './presets';
 import { buildIndex, searchFoods, withinOneEdit } from './search';
+import { isFamiliarFood, suggestFoods } from './suggest';
 
 const data: FoodData = JSON.parse(
   readFileSync(new URL('../../public/data/foods.json', import.meta.url), 'utf8'),
@@ -208,5 +209,41 @@ describe('preset meals', () => {
   it('only uses foods that exist in the data', () => {
     const missing = PRESET_MEALS.flatMap((preset) => preset.items).filter((item) => !byId.has(item.foodId));
     expect(missing).toEqual([]);
+  });
+});
+
+describe('suggestFoods', () => {
+  const pasta = [{ foodId: '169737', servings: 2 }];
+
+  it('suggests foods that raise the limiting amino acid', () => {
+    const before = limitingAminoAcid(mealTotals(pasta, byId));
+    const suggestions = suggestFoods(pasta, data.foods, byId);
+    expect(before?.key).toBe('lysine');
+    expect(suggestions.length).toBe(3);
+    expect(suggestions.every((item) => item.newRatio > (before?.ratio ?? 1))).toBe(true);
+    // The prediction matches what actually happens when the food is added.
+    const first = suggestions[0];
+    const after = limitingAminoAcid(mealTotals([...pasta, { foodId: first.food.id, servings: 1 }], byId));
+    expect(after?.ratio).toBe(first.newRatio);
+  });
+
+  it('offers variety: one food per category, none already in the meal', () => {
+    const suggestions = suggestFoods(pasta, data.foods, byId);
+    expect(new Set(suggestions.map((item) => item.food.category)).size).toBe(suggestions.length);
+    expect(suggestions.some((item) => item.food.id === '169737')).toBe(false);
+  });
+
+  it('keeps a vegan meal vegan', () => {
+    const suggestions = suggestFoods(pasta, data.foods, byId);
+    expect(suggestions.every((item) => item.food.tags.includes('vegan'))).toBe(true);
+  });
+
+  it('suggests nothing when the meal already meets the pattern or is empty', () => {
+    expect(suggestFoods([{ foodId: '172187', servings: 2 }], data.foods, byId)).toEqual([]);
+    expect(suggestFoods([], data.foods, byId)).toEqual([]);
+  });
+
+  it('has a healthy pool of familiar foods to draw from', () => {
+    expect(data.foods.filter(isFamiliarFood).length >= 30).toBe(true);
   });
 });

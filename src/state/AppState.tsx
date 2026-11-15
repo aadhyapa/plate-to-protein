@@ -30,6 +30,8 @@ interface AppStateValue {
   setUnits: (units: WeightUnit) => void;
   /** Price per serving for compare mode; null removes it. */
   setPrice: (foodId: string, price: number | null) => void;
+  /** Save a quiz result; keeps the best score. */
+  setQuizScore: (quizId: string, score: number) => void;
 
   /** Whether the My Meal drawer is open. Not saved. */
   mealOpen: boolean;
@@ -139,6 +141,13 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const setQuizScore = useCallback((quizId: string, score: number) => {
+    setState((previous: AppState) => {
+      if ((previous.quizScores[quizId] ?? -1) >= score) return previous;
+      return { ...previous, quizScores: { ...previous.quizScores, [quizId]: score } };
+    });
+  }, []);
+
   const value = useMemo<AppStateValue>(
     () => ({
       state,
@@ -153,6 +162,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setGoal,
       setUnits,
       setPrice,
+      setQuizScore,
       mealOpen,
       setMealOpen,
     }),
@@ -169,6 +179,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setGoal,
       setUnits,
       setPrice,
+      setQuizScore,
       mealOpen,
     ],
   );

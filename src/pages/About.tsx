@@ -28,6 +28,26 @@ export default function About() {
           935 (2007).
         </li>
         <li>
+          <strong>Protein goal:</strong> Institute of Medicine, <cite>Dietary Reference Intakes for Energy,
+          Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids</cite> (2005); Thomas,
+          Erdman &amp; Burke, <cite>Nutrition and Athletic Performance</cite>, J Acad Nutr Diet 116(3), 2016.
+        </li>
+        <li>
+          <strong>Digestion:</strong>{' '}
+          <a
+            href="https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look"
+            target="_blank"
+            rel="noreferrer"
+          >
+            OpenStax, Anatomy and Physiology 2e, section 23.7
+          </a>
+          .
+        </li>
+        <li>
+          <strong>Complementary proteins:</strong> Melina, Craig &amp; Levin, <cite>Position of the Academy
+          of Nutrition and Dietetics: Vegetarian Diets</cite>, J Acad Nutr Diet 116(12), 2016.
+        </li>
+        <li>
           <strong>3D structures:</strong>{' '}
           <a href="https://www.rcsb.org/" target="_blank" rel="noreferrer">
             RCSB Protein Data Bank

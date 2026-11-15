@@ -1,0 +1,637 @@
+/* Styles for the Gut stage. */
+
+.gut {
+  display: grid;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.gut a:not(.button) {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.sample {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sample__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ---------- Digestion walkthrough ---------- */
+
+.digest {
+  display: grid;
+  gap: 1rem;
+}
+
+.digest__layout {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Pinned panel: diagram + the meal's bead chains. */
+.digest__visual {
+  position: sticky;
+  top: 6.75rem;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.digest__visual[data-step='blood'] {
+  border-color: var(--blood);
+}
+
+.digest__where {
+  margin-bottom: 0.5rem;
+}
+
+.digest__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+
+.digest__step {
+  display: grid;
+  gap: 0.75rem;
+  align-content: center;
+  min-height: 55vh;
+  padding: 1.5rem 0;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.digest__step.is-active {
+  opacity: 1;
+}
+
+.digest__step .eyebrow {
+  margin-bottom: 0;
+}
+
+.digest__title {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 52rem) {
+  .digest__layout {
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .digest__visual {
+    top: 8rem;
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+
+  .digest__step {
+    min-height: 70vh;
+  }
+}
+
+/* Reading without motion: every step is fully visible. */
+@media (prefers-reduced-motion: reduce) {
+  .digest__step {
+    opacity: 1;
+  }
+}
+
+/* ---------- Tract diagram ---------- */
+
+:root {
+  --blood: #b91c1c;
+}
+
+:root[data-theme='dark'] {
+  --blood: #f87171;
+}
+
+.tract {
+  width: 100%;
+  max-height: 16rem;
+  display: block;
+}
+
+.tract text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--text-muted);
+}
+
+.tract__fill {
+  fill: var(--surface-sunk);
+  stroke: var(--border);
+  stroke-width: 2;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.tract__tube,
+.tract__coil,
+.tract__vessel,
+.tract__arrow {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease;
+}
+
+.tract__tube {
+  stroke: var(--border);
+  stroke-width: 10;
+}
+
+.tract__coil {
+  stroke: var(--border);
+  stroke-width: 15;
+}
+
+.tract__vessel {
+  stroke: var(--border);
+  stroke-width: 9;
+}
+
+.tract__arrow {
+  stroke: var(--border);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 4;
+}
+
+.tract__part.is-active .tract__fill {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.tract__part.is-active .tract__coil {
+  stroke: var(--accent);
+}
+
+.tract__part.is-active .tract__vessel,
+.tract__part.is-active .tract__arrow {
+  stroke: var(--blood);
+}
+
+.tract__part.is-active text {
+  fill: var(--text);
+}
+
+/* Labels sitting on a filled organ need the on-accent color. */
+.tract__part.is-active .tract__fill + text {
+  fill: var(--on-accent);
+}
+
+/* ---------- Bead chains ---------- */
+
+.chains {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chains__row {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.chains__name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chain {
+  display: flex;
+  align-items: center;
+  height: 1.1rem;
+  padding-left: 0.4rem;
+}
+
+.bead {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--bead);
+  border: 1.5px solid var(--surface);
+  transition: margin 0.6s ease, transform 0.6s ease;
+}
+
+.bead[data-hue='0'] { --bead: var(--plate); }
+.bead[data-hue='1'] { --bead: var(--gut); }
+.bead[data-hue='2'] { --bead: var(--cell); }
+.bead[data-hue='3'] { --bead: var(--structure); }
+.bead[data-hue='4'] { --bead: var(--wrap-up); }
+
+/* Mouth: a tightly folded protein, beads bunched on top of each other. */
+.chain[data-step='mouth'] .bead {
+  margin-left: -0.4rem;
+}
+
+.chain[data-step='mouth'] .bead:nth-child(even) {
+  transform: translateY(-0.2rem);
+}
+
+.chain[data-step='mouth'] .bead:nth-child(3n) {
+  transform: translateY(0.2rem);
+}
+
+/* Stomach: unfolded into a line and cut into shorter lengths. */
+.chain[data-step='stomach'] .bead {
+  margin-left: -0.12rem;
+}
+
+.chain[data-step='stomach'] .bead:nth-child(4n + 1) {
+  margin-left: 0.45rem;
+}
+
+/* Small intestine: single amino acids and a few pairs. */
+.chain[data-step='intestine'] .bead {
+  margin-left: 0.3rem;
+}
+
+.chain[data-step='intestine'] .bead:nth-child(5n + 2) {
+  margin-left: -0.12rem;
+}
+
+/* Bloodstream: free amino acids drifting along. */
+.chain[data-step='blood'] .bead {
+  margin-left: 0.5rem;
+  animation: drift 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(-0.18rem);
+  }
+  to {
+    transform: translateY(0.18rem);
+  }
+}
+
+/* ---------- Tap points ---------- */
+
+.tap {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.tap summary {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.tap summary::-webkit-details-marker {
+  display: none;
+}
+
+.tap summary::before {
+  content: '+';
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  flex: none;
+}
+
+.tap[open] summary::before {
+  content: '−';
+}
+
+.tap p {
+  padding: 0 0.9rem 0.9rem;
+}
+
+/* ---------- Amino acid profile ---------- */
+
+.profile {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.profile .section-title {
+  margin-bottom: 0;
+}
+
+.profile__summary {
+  font-size: 1.1rem;
+}
+
+.amino {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.amino__scale {
+  display: none;
+}
+
+.amino__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.amino__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+}
+
+.amino__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.amino__value {
+  grid-row: 1;
+  grid-column: 2;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.amino__track {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  position: relative;
+  height: 1.1rem;
+  border-radius: 4px;
+  background: var(--surface-sunk);
+}
+
+.amino__bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  border-radius: 4px;
+  background: var(--cell);
+  transition: width 0.4s ease;
+}
+
+/* Below the pattern: accent color plus a striped texture, so it doesn't rely on color alone. */
+.amino__row.is-below .amino__bar {
+  background: repeating-linear-gradient(-45deg, var(--accent) 0 6px, color-mix(in srgb, var(--accent) 65%, var(--surface)) 6px 10px);
+}
+
+/* The 100% reference line. */
+.amino__line {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: 50%;
+  width: 2px;
+  background: var(--text);
+}
+
+.badge--limiting {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+@media (min-width: 40rem) {
+  .amino__scale {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-left: 13.75rem;
+    margin-right: 10.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .amino__scale span:last-child {
+    text-align: right;
+  }
+
+  .amino__row {
+    grid-template-columns: 13rem minmax(0, 1fr) 10rem;
+  }
+
+  .amino__track {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .amino__value {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}
+
+/* ---------- Fix it ---------- */
+
+.fixit {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.fixit .card__title {
+  margin-bottom: 0;
+}
+
+.fixit__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fixit__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.fixit__item > div {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.fixit__name {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* ---------- Lesson ---------- */
+
+.lesson {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+}
+
+.lesson .section-title {
+  margin-bottom: 0;
+}
+
+.lesson__compare {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.lesson__compare li {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.lesson__compare li.is-together {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+.lesson__food {
+  font-weight: 700;
+}
+
+.lesson__score {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.lesson__compare li.is-together .lesson__score {
+  color: var(--accent);
+}
+
+/* ---------- Quiz ---------- */
+
+.quiz {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+}
+
+.quiz .section-title {
+  margin-bottom: 0;
+}
+
+.quiz__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.quiz__question {
+  border-top-width: 1px;
+  border-top-color: var(--border);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.quiz__question fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.quiz__question legend {
+  padding: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.quiz__options {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.quiz__option {
+  min-height: 2.75rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quiz__option:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.quiz__option:disabled {
+  cursor: default;
+  color: var(--text-muted);
+}
+
+.quiz__option.is-correct {
+  border-color: var(--cell);
+  border-width: 2px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.quiz__option.is-wrong {
+  border-color: var(--accent);
+  border-style: dashed;
+  border-width: 2px;
+  color: var(--text);
+}
+
+.quiz__mark {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.quiz__feedback:empty,
+.quiz__result:empty {
+  display: none;
+}

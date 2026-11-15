@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import { STAGES } from './lib/stages';
 import About from './pages/About';
+import Gut from './pages/Gut';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import Plate from './pages/Plate';
@@ -17,7 +18,7 @@ export default function App() {
           <Route
             key={stage.id}
             path={stage.path}
-            element={stage.id === 'plate' ? <Plate /> : <StagePage stage={stage} />}
+            element={stage.id === 'plate' ? <Plate /> : stage.id === 'gut' ? <Gut /> : <StagePage stage={stage} />}
           />
         ))}
         <Route path="/about" element={<About />} />

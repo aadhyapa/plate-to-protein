@@ -5,6 +5,7 @@ import App from './App';
 import { AppStateProvider } from './state/AppState';
 import './styles/global.css';
 import './styles/plate.css';
+import './styles/gut.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

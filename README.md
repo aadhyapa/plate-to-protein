@@ -6,7 +6,7 @@ The full build spec is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Milestone 3 of 8 (Plate stage): you can search about 1,200 foods, filter them, build a meal, set a daily protein goal, compare foods and start from preset meals. Gut, Cell, Structure and Wrap-up are still placeholders.
+Milestone 4 of 8 (Gut stage): the Plate stage (food search, meal builder, protein goal, compare, presets) and the Gut stage (scroll-through digestion, the meal's amino acid profile, fix-it suggestions, a complementary protein lesson and a quiz) are built. Cell, Structure and Wrap-up are still placeholders.
 
 ## Tech stack
 
