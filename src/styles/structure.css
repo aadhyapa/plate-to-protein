@@ -1,0 +1,267 @@
+/* Styles for the Structure stage. */
+
+.structure {
+  display: grid;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.structure a:not(.button) {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+/* ---------- Picker ---------- */
+
+.featured {
+  display: grid;
+  gap: 1rem;
+}
+
+.featured .section-title {
+  margin-bottom: 0;
+}
+
+.featured__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+}
+
+.preset[aria-pressed='true'] {
+  border-color: var(--accent);
+  border-width: 2.5px;
+  background: var(--surface-sunk);
+}
+
+.lookup {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 30rem;
+}
+
+.lookup__error {
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-sunk);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- Viewer ---------- */
+
+.viewer-layout {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.viewer-layout__main,
+.viewer-layout__side {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  min-width: 0;
+}
+
+@media (min-width: 60rem) {
+  .viewer-layout {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+}
+
+.mol {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.mol__stage {
+  position: relative;
+  height: min(60vh, 32rem);
+  min-height: 18rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* 3Dmol.js sizes its canvas from this box, which must be positioned. */
+.mol__canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+.mol__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 0.75rem;
+  place-content: center;
+  justify-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+.mol__moves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mol__picked {
+  min-height: 2.8em;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  background: var(--surface-sunk);
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  align-items: start;
+}
+
+.controls__group {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.controls__group legend {
+  padding: 0;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.controls__spin {
+  align-self: end;
+  justify-self: start;
+}
+
+.input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- Tour, info and prediction note ---------- */
+
+.tour,
+.info,
+.prediction {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tour .card__title,
+.info .card__title,
+.tour .card__tag {
+  margin-bottom: 0;
+  justify-self: start;
+}
+
+.tour__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.info__facts {
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.info__facts dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.info__facts dd {
+  margin: 0;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend__swatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+/* ---------- Side-by-side comparison ---------- */
+
+.compare-view {
+  display: grid;
+  gap: 1rem;
+}
+
+.compare-view .section-title {
+  margin-bottom: 0;
+}
+
+.compare-view__pair {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.compare-view__pair > div {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.compare-view__label {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+@media (min-width: 48rem) {
+  .compare-view__pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.compare-view .mol__stage {
+  height: min(50vh, 24rem);
+}

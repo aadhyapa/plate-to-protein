@@ -7,6 +7,7 @@ import './styles/global.css';
 import './styles/plate.css';
 import './styles/gut.css';
 import './styles/cell.css';
+import './styles/structure.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

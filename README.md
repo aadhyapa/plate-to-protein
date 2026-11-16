@@ -6,13 +6,14 @@ The full build spec is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Milestone 5 of 8 (Cell stage): Plate (food search, meal builder, protein goal, compare, presets), Gut (digestion walkthrough, amino acid profile, fix-it suggestions, lesson, quiz) and Cell (DNA to mRNA to protein simulator, codon wheel, mutation lab with the sickle cell change) are built. Structure and Wrap-up are still placeholders.
+Milestone 6 of 8 (Structure stage): all four stages are built. Plate (food search, meal builder, protein goal, compare, presets), Gut (digestion walkthrough, amino acid profile, fix-it suggestions, lesson, quiz), Cell (DNA to mRNA to protein simulator, codon wheel, mutation lab) and Structure (3D viewer with guided tours, normal vs sickle hemoglobin, load by PDB ID or UniProt accession). Wrap-up is still a placeholder.
 
 ## Tech stack
 
 - Vite + React + TypeScript
 - React Router (one route per stage)
 - React context persisted to `localStorage` (wrapped so the site works without storage)
+- 3Dmol.js for 3D structures, loaded from cdnjs only when the Structure stage is opened; structures are fetched live from RCSB PDB and the AlphaFold database
 - Hand-written fuzzy search and SVG/CSS charts, so there are no search or chart dependencies
 - Vitest for logic tests
 - Hosted on Netlify (`netlify.toml` holds the build settings and the single-page-app redirect)

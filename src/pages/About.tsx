@@ -64,6 +64,15 @@ export default function About() {
         </li>
       </ul>
 
+      <h2>Built with</h2>
+      <p>
+        The 3D viewer is{' '}
+        <a href="https://3dmol.org/" target="_blank" rel="noreferrer">
+          3Dmol.js
+        </a>{' '}
+        (Rego &amp; Koes, <cite>Bioinformatics</cite> 31(8), 2015).
+      </p>
+
       <h2>Keep learning</h2>
       <p>
         <a href="https://pdb101.rcsb.org/" target="_blank" rel="noreferrer">
